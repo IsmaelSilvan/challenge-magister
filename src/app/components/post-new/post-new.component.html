@@ -1,0 +1,78 @@
+<div class="col-md-12 mt-2">
+
+    <h1> {{page_title}} </h1>
+    <p *ngIf="!is_edit">Puedes escribir aquí un nuevo artículo al blog</p>
+    <p *ngIf="is_edit && post">Modifica la publicación {{post.title}}</p>
+    <hr />
+
+    <!-- Mensaje de exito o fracaso en la CREACIÓN DEL POST -->
+    <div class="alert alert-success" *ngIf="status == 'success' && !is_edit">
+        Se ha creado la entrada correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' && !is_edit">
+        No se han podido crear la entrada, intentalo más tarde
+    </div>
+
+    <!-- Mensaje de exito o fracaso en la ACTUALIZACIÓN DEL POST -->
+    <div class="alert alert-success" *ngIf="status == 'success' && is_edit && post">
+        Se ha actualizado la entrada correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' && is_edit && post">
+        No se han podido actualizar la entrada, intentalo más tarde
+    </div>
+
+    <!-- Formulario de Formulario de CREACION de POST -->
+    <form #postNewForm="ngForm" (ngSubmit)="onSubmit(postNewForm)" class="col-md-5 ml-0 pl-0 pb-3">
+
+        <div class="form-group">
+            <label for="title">Titulo</label>
+            <input name="title" type="text" class="form-control" #title="ngModel" [(ngModel)]="post.title" required />
+            <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+                El titulo es un campo requerido
+            </small>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="content">Descripción</label>
+            <textarea name="content" type="text" class="form-control" #content="ngModel" [(ngModel)]="post.content"
+                [froalaEditor]="froala_options" required></textarea>
+            <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                No puede dejar un contenido vacio
+            </small>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="category_id">Titulo</label>
+            <select name="category_id" type="text" class="form-control" #category_id="ngModel"
+                [(ngModel)]="post.category_id" required>
+                <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+            </select>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="image">Imagen</label>
+            <div *ngIf="is_edit && post && post.image" class="m-3">
+                <img src="{{ api_url + 'post/image/' + post.image }}" class="card-img rounded h-100 w-50"
+                alt="Imagen de la publicación {{post.title}}" />
+            </div>
+
+            <angular-file-uploader [config]="afuConfig" [resetUpload]="true" (ApiResponse)="imageUpload($event)"
+                id="imageUpload" class="subir_imagen_boton">
+            </angular-file-uploader>
+        </div>
+
+        <br />
+
+        <input type="submit" value="Guardar la publicación" class="btn btn-success"
+            [disabled]="!postNewForm.form.valid" />
+
+    </form>
+    <!-- Fin de Formulario de CREACION de POST -->
+
+</div>

@@ -1,0 +1,24 @@
+<div class="col-md-12 loading" *ngIf="!post">
+    <!-- Esto es para simular una pantalla de carga miestras recogemos los datos de la entrada -->
+    <p>Cargando entrada…</p>
+</div>
+
+<div class="col-md-12 mt-3" *ngIf="post">
+    <div class=" w-100 column d-flex align-content-center justify-content-center pt-1 pb-1">
+        <img src="assets/images/image-default.jpg" class="img-fluid rounded h-100 w-auto" alt="Imagen nula"
+            *ngIf="!post.image" />
+        <img src="{{ api_url + 'post/image/' + post.image }}" class="img-fluid rounded h-100 w-auto"
+            alt="Imagen de la publicación {{post.title}}" *ngIf="post.image" />
+    </div>
+    <h1> {{post.title}} </h1>
+    <hr/>
+    <h3>‌{{post.call_category.name}} - ‌{{post.call_user.name + ' ' + post.call_user.surname}}</h3>
+    <!-- Cuando recibimos los el array que compone la publicacion, también recibimos dentro otros dos array: uno con los datos de la categoria a la que pertenece y el segundo con los datos del creador/usuario de esa entrada
+    estos métodos del API se encuentran en el archivo del modelo donde hacemos la relación de uno a muchos, y que yo lo llame callUser y callCategory -->
+    <hr/>
+
+<p [innerHTML]="post.content"> </p> <!-- Con esto conseguimos que los strong y parrafos de cada entrada se vean bien y no como un string sin más-->
+ 
+
+
+</div> 

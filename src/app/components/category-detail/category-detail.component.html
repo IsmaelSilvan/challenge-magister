@@ -1,14 +1,24 @@
-<div class="loading" *ngIf="!posts">
+<div class="loading" *ngIf="!category">
     <!-- Esto es para simular una pantalla de carga miestras cogemos todas las publicaciones -->
     <p>Cargando publicaciones…</p>
 </div>
 
-<div class="container-fluid pb-3" *ngIf="posts">
+<div class="container-fluid pb-3" *ngIf="category">
 
     <h1> {{page_title}} </h1>
     <hr />
 
-    <div class="card-columns mt-3 ">
+
+    <div class="loading" *ngIf="!posts">
+        <!-- Esto es para simular una pantalla de carga miestras cogemos todas las publicaciones -->
+        <p>Cargando listado…</p>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="posts && posts.length ==0">
+        <!-- Este mensaje aparecerá si no hay publicaciones en esta categoría -->
+        No hay entradas en esta categoría
+    </div>
+    <div class="card-columns mt-3 " *ngIf="posts && posts.length >=1">
         <article class="card w-100 mt-2 contenedor_publicacion" *ngFor="let post of posts">    <!-- Hacemos un bucle de posts mostrando por cada entrada una tarjeta -->
             <div class="card-header">
                 <h3>

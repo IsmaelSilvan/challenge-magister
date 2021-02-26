@@ -1,0 +1,73 @@
+<div class="col-md-12 mt-2">
+
+    <h1> {{page_title}} </h1>
+    <p *ngIf="status != 'success'">Modifica tus datos personales de usuario</p>
+    <hr />
+
+    <!-- Mensaje de exito o fracaso en la actualización -->
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Tus datos se han actualizado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        No se han podido actualizar los datos!!
+    </div>
+
+    <!-- Formulario de registro -->
+    <form #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)" class="col-md-5 ml-0 pl-0 pb-3">
+
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input name="name" type="text" class="form-control" #name="ngModel" [(ngModel)]="user.name"
+                pattern="[a-zA-Z]+" /> <!-- priemro damos un nombre al input y después usamos el 2-data-binding  -->
+            <!-- Ponemos el required y el pattern para la validación en html↑↑↑ y luego la mostramos un mensaje de error con Angular con la directiva ngIf↓↓↓-->
+            <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                El nombre no es valido
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Apellido</label>
+            <input name="surname" type="text" class="form-control" #surname="ngModel" [(ngModel)]="user.surname"
+                required pattern="[a-zA-Z]+" />
+
+            <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+                Los apellidos no son validos
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input name="email" type="email" class="form-control" #email="ngModel" [(ngModel)]="user.email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+
+            <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                El correo no es valido
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea name="description" type="text" class="form-control" #description="ngModel"
+                [(ngModel)]="user.description" [froalaEditor]="froala_options"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Avatar</label>
+            <div *ngIf="identity && identity.image">
+                <img src="{{ api_url + 'usuario/avatar/' + identity.image }}" class="avatar_edit"
+                    alt="Imagen de avatar de {{identity.name}}" />
+            </div>
+
+            <angular-file-uploader [config]="afuConfig" [resetUpload]="true" (ApiResponse)="avatarUpload($event)"
+                id="avatarUpload">
+            </angular-file-uploader>
+        </div>
+
+        <br/>
+
+        <input type="submit" value="Actualizar datos" class="btn btn-success" [disabled]="!userEditForm.form.valid" />
+
+    </form>
+    <!-- Fin de Formulario de registro -->
+
+</div>
