@@ -24,7 +24,8 @@ import { FormComponent } from './components/form/form.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule, routing, FormsModule, // Modulos para fistintas funcionalidades
