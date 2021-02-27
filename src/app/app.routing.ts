@@ -2,14 +2,20 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+
 // importamos los componentes
 import { HomeComponent } from './components/home/home.component';
-        // Usuarios
- 
+import { FormComponent } from './components/form/form.component';
+import { EndComponent } from './components/end/end.component'; 
+
+
+
 // Matriz de rutas / Definir las rutas
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'inicio', component: HomeComponent },
+    { path: 'formulario', component: FormComponent },
+    { path: 'final', component: EndComponent },
    
 ];
 

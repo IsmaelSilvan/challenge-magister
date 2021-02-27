@@ -4,6 +4,10 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs'; // Inyectamos el observable
 import { ItemInterface } from 'src/app/interfaces/itemInterface'; // Importamos nuestro Modelo/Interface
 
+
+
+ 
+
  
 
 @Injectable({
@@ -20,6 +24,10 @@ export class ConexionService {
   public items: Observable<ItemInterface[]>;
 
 
+  private matriculaCollection: AngularFirestoreCollection<any>; // Declaramos la colecion de matriculas donde guardaremos las matriculas
+  public matricula: object;                                     // Declaramos la variable
+   
+  
 
  
 
@@ -30,6 +38,14 @@ export class ConexionService {
 
 
 
+
+
+
+
+    this.matriculaCollection = _angularFirestore.collection<any>('matriculas');   // Cogemos la colección para las matrículas
+    this.matricula = new Object;
+
+
   }
 
   getItems() {
@@ -38,7 +54,13 @@ export class ConexionService {
 
 
 
-
+addMatricula(data: object){
+ this.matricula = data;
+  console.log(this.matricula); 
+  console.log(typeof(this.matricula));
+  console.log(Object.values(this.matricula));
+  this.matriculaCollection.add(this.matricula);
+}
   
 
 
