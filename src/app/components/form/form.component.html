@@ -20,7 +20,7 @@
 
 
 
-<form #newForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-5 ml-0 pl-0 pb-3">
+<form #newForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-4 mt-4 ml-0 pl-3 pb-3 needs-validation">
 
 
 
@@ -28,24 +28,34 @@
 
   <div class="form-group">
     <label for="rama">rama</label>
-    <select name="rama" type="text" class="form-control" #rama="ngModel" [(ngModel)]="matricula.rama" required
-      placeholder="Ej: Maestros - Audición y lenguaje">
-      <option value="" readonly>Ej: Maestros - Audición y lenguaje </option>
-      <!--  <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option> -->
+    <select name="rama" type="text" class="form-control" #rama="ngModel" [(ngModel)]="matricula.rama" required>
+      <option value="" readonly class="text text-secondary">Ej: Maestros - Audición y lenguaje </option>
+      <option *ngFor="let rama of ramas" value="{{rama.rama_description}}" class="fw-bold ">{{rama.rama_description}}</option>
     </select>
   </div>
-
-
- 
-    <small *ngIf="!rama.valid && rama.touched" class="invalid-feedback d-block">
-      El rama es un campo requerido
-    </small>
-    <hr />
   
+  <small *ngIf="!rama.valid && rama.touched" class="invalid-feedback d-block">
+    Este es un campo requerido
+  </small>
+  <hr />
+  
+  
+  <div class="form-group">
+    <label for="provincia">provincia</label>
+    <select name="provincia" type="text" class="form-control" #provincia="ngModel" [(ngModel)]="matricula.provincia" required>
+      <option value="" readonly class="text text-secondary">Ej: Madrid </option>
+      <option *ngFor="let provincia of provincias" value="{{provincia.city}}" class="fw-bold ">{{provincia.city}}</option>
+    </select>
+  </div>
+  
+  <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block">
+    Este es un campo requerido
+  </small>
+  <hr />
   
     <label for="provincia">provincia</label>
     <input name="provincia" type="text" class="form-control" #provincia="ngModel" [(ngModel)]="matricula.provincia" required />
-    <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block">
+    <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback  ">
       El provincia es un campo requerido
     </small>
     <hr />
