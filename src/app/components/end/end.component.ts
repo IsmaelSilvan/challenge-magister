@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-end',
-  templateUrl: './end.component.html',
-  styleUrls: ['./end.component.css']
+  templateUrl: '../home/home.component.html'
 })
 export class EndComponent implements OnInit {
-
-  constructor() { }
+  public home: boolean;
+  constructor() { this.home = false }
 
   ngOnInit(): void {
   }

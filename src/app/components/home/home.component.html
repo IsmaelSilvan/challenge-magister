@@ -1,5 +1,47 @@
-<p>home works!</p>
+<div id="all_container_home" class="container row mt-3 mx-auto pt-5">
+    <div class="col" *ngIf="home">
+        <div class="row col-12  mt-5 pt-4 px-0">
+            <img id="imagen_formulario" class=" mx-auto d-block " src="../../../assets/images/magister_logo.png"
+                alt="Magister">
+        </div>
+
+
+        <h1 class="text-center">¡Comencemos con tu matrícula!</h1>
+
+        <p class="mx-auto text-center col-4 h5">
+            Para comenzar a especializarte, vamos a realizar unas preguntas para darte el mejor servicio
+        </p>
+
+        <nav class=" botonera_inferior col col-12 mx-auto">
+            <button class="btn btn-info col-3 mx-auto shadow mb-2" [routerLink]="['/form']">
+                Comenzar
+            </button>
+            <p class="text text-info" [routerLink]="['/home']">Volver atrás</p>
+        </nav>
+    </div>
+
+    <div class="col" *ngIf="!home">
+
+        <div class="row col-12  mt-5 pt-4 px-0">
+            <img id="imagen_formulario" class=" mx-auto d-block " src="../../../assets/images/magister_logo.png"
+                alt="Magister">
+        </div>
+
+
+        <p class="text-center h1">¡Gracias!</p>
+        <h1 class="text-center">¡Tu reserva está en proceso!</h1>
+        <p class="mx-auto text-center col-4 h5">
+            La matrícula sólo será efectiva una vez se haya recibido el pago por Tarjeta o Transferencia
+        </p>
 
 
 
+        <nav class=" botonera_inferior col col-12 mx-auto">
+            <a class="btn btn-info col-3 mx-auto shadow mb-2" [routerLink]="['/home']">
+                Volver a Home
+            </a>
+            <p class="text text-info" [routerLink]="['/form']">Volver atrás</p>
+        </nav>
 
+    </div>
+</div>

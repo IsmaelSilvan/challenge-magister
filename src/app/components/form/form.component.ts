@@ -23,7 +23,7 @@ declare var $: any
 })
 
 export class FormComponent implements OnInit {
-
+ 
   // Declaración para las ramas
   public ramas: any;                                          // Creamos la variable items, de tipo any, que recibira toda la colección
   public rama: Rama;                        // Creamos la variable item donde definiremos cada campo en la vista
@@ -58,7 +58,7 @@ export class FormComponent implements OnInit {
 
   constructor(private _conexionService: ConexionService) {  // Importamos el servicio en el constructor
     // Parte del constructor para plasmar datos en la vista
-
+ 
     // Descomponer individualmente Ramas
     this.rama = new Rama('');                           // Damos un valor vacio a nuestro objeto
     this._conexionService.getRamas().subscribe(rama => { // Con el método de nuestro servicio y el subscribe, hacemos que cada objeto dentro de items se converta en un elemento item
@@ -141,10 +141,11 @@ export class FormComponent implements OnInit {
        console.log(Object.values(this.matricula));
        */
     this._conexionService.addMatricula(this.matricula); // Envio los datos que recibo  al método de mi servicio para enviar los datos finales del formulario
-
-
   }
 
-
-
+ siguiente(siguiente:string,anterior:string){
+ $('#'+siguiente).css('display','block');  
+ $('#'+anterior).css('display','none');
+ }
 }
+

@@ -1,8 +1,9 @@
-<div id="all_container_form" class="container row mt-3 mx-auto p-0  bg-white">
+<div id="all_container_form" class="container row mt-3 mx-auto p-0">
   <div id="lateral_menu" class=" col col-3 p-0">
 
-    <div class="row col-12">
-      sfhg
+    <div class="row col-12  m-0 pt-4 px-0">
+      <img id="imagen_formulario" class=" w-100 mx-auto d-block " src="../../../assets/images/magister_logo.png"
+        alt="Magister">
     </div>
 
     <div id="contenedor_imagen_form" class="row col-md-12 col-0 m-0 p-0">
@@ -13,12 +14,12 @@
 
 
 
-  <form #newForm="ngForm" (ngSubmit)="onSubmit()" class="col-9 mx-0 my-3 px-3 needs-validation">
-    <!-- 
-    <div class="form_part container ">
-      <!-- especialización---
+  <form #newForm="ngForm" (ngSubmit)="onSubmit()" class="col-9 mx-0 p-3 needs-validation bg-white">
+
+    <div class="form_part container" id="container_especializacion">
+      <!-- especialización-->
       <h2 class="text-center mb-5">¿En que te quieres especializar?</h2>
-      <!-- especialización grupo top---
+      <!-- especialización grupo top-->
       <div class="row  mb-5">
         <div class="col">
           <div class="form-group mb-3">
@@ -56,8 +57,8 @@
           </div>
         </div>
       </div>
-      <!-- Fin especialización grupo top---
-      <!-- especialización grupo mid---
+      <!-- Fin especialización grupo top-->
+      <!-- especialización grupo mid-->
       <div class="col mb-5">
         <h4>¿Has sido alumn@ de Magister?</h4>
         <h6 class="text-info pb-3">Consulta Condiciones →</h6>
@@ -78,9 +79,9 @@
           <label for="alumno_preSi2017" class="btn btn-outline-primary mr-3 ">Si, después de 2017</label>
 
         </div>
-        <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block position-absolute">
-          Este es un campo requerido
-        </small>
+<!-- // VALIDACION -->
+
+
       </div>
 
       <div class="col mb-3">
@@ -94,26 +95,24 @@
           <label for="entrega_material" class="btn btn-outline-primary  ">Material mes a mes</label>
         </div>
       </div>
-      <!-- Fin especialización grupo mid---
+      <!-- Fin especialización grupo mid-->
 
       <nav class=" botonera_inferior row col-12">
-        <button class="btn btn-info mx-auto shadow mb-3 ">
+        <a class="btn btn-info mx-auto shadow mb-3 " (click)="siguiente('container_modYhor','container_especializacion')">
           Siguiente
-        </button>
+        </a>
       </nav>
 
     </div>
-  -->
 
 
 
-    <!--
 
-    <div class=" form_part container">
-      <!-- modalidad y horario ---
+    <div class="form_part  container" id="container_modYhor">
+      <!-- modalidad y horario -->
       <h2 class="text-center mb-5">Elegige el horario y modalidad que más te acomode</h2>
 
-      <!-- Inicio Modalidad---
+      <!-- Inicio Modalidad-->
       <div class="col form-group mb-5">
         <h4>Modalidad</h4>
         <h6 class="mb-3">(Seleciona una opción)</h6>
@@ -131,9 +130,9 @@
           </div>
         </div>
       </div>
-      <!-- Fin Modalidad---
-      <!-- Inicio Horario---
-      <div class="col col-11">
+      <!-- Fin Modalidad-->
+      <!-- Inicio Horario-->
+      <div class="col col-12">
         <div class="form-group mb-4">
           <h4>Horario</h4>
           <h6 class="pb-3">(Seleciona una opción)</h6>
@@ -164,19 +163,18 @@
           </select>
         </div>
       </div>
-      <!-- Fin Horario---
+      <!-- Fin Horario-->
 
       <nav class=" botonera_inferior col col-12 mx-auto">
-        <button class="btn btn-info mx-auto shadow mb-2">
+        <a class="btn btn-info col-3 mx-auto shadow mb-2" (click)="siguiente('container_tarifas','container_modYhor')">
           Siguiente
-        </button>
+        </a>
         <p class="text text-info">Volver atrás</p>
       </nav>
 
 
     </div>
 
-  -->
 
 
 
@@ -185,9 +183,10 @@
 
 
 
-    <!--
-    <div class=" form_part container">
-      <!-- tarifas ---
+
+
+    <div class="form_part  container" id="container_tarifas">
+      <!-- tarifas -->
       <h2 class="text-center mb-5">Selecciona tu tarifa</h2>
       <div class="form-group col col-12">
         <h4>Tarifas</h4>
@@ -204,15 +203,14 @@
 
 
       <nav class=" botonera_inferior col col-12 mx-auto">
-        <button class="btn btn-info mx-auto shadow mb-2">
+        <a class="btn btn-info col-3 mx-auto shadow mb-2" (click)="siguiente('container_datosPersonales','container_tarifas')">
           Siguiente
-        </button>
+        </a>
         <p class="text text-info">Volver atrás</p>
       </nav>
 
     </div>
 
-  -->
 
 
 
@@ -222,10 +220,11 @@
 
 
 
-    <!--
 
-    <div class="form_part container">
-      <!-- datos personales ---
+
+
+    <div class="form_part  container" id="container_datosPersonales">
+      <!-- datos personales -->
       <h2 class="text-center mb-5">Tus datos personales</h2>
 
       <div class="col form-group mb-6 py-5">
@@ -233,7 +232,7 @@
           <h4>Nombre completo</h4>
         </label>
         <input name="name" type="text" class="form-control" #name="ngModel" [(ngModel)]="matricula.name" required />
-        <small *ngIf="!name.valid && name.touched"  class="invalid-feedback d-block position-absolute">
+        <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block position-absolute">
           El name es un campo requerido
         </small>
       </div>
@@ -244,7 +243,7 @@
             <h4>DNI - NIE</h4>
           </label>
           <input name="dni" type="text" class="form-control" #dni="ngModel" [(ngModel)]="matricula.dni" required />
-          <small *ngIf="!dni.valid && dni.touched"  class="invalid-feedback d-block position-absolute">
+          <small *ngIf="!dni.valid && dni.touched" class="invalid-feedback d-block position-absolute">
             El dni es un campo requerido
           </small>
         </div>
@@ -254,7 +253,7 @@
             <h4>Movil</h4>
           </label>
           <input name="movil" type="tel" class="form-control" #movil="ngModel" [(ngModel)]="matricula.movil" required />
-          <small *ngIf="!movil.valid && movil.touched"  class="invalid-feedback d-block position-absolute">
+          <small *ngIf="!movil.valid && movil.touched" class="invalid-feedback d-block position-absolute">
             El movil es un campo requerido
           </small>
         </div>
@@ -265,25 +264,24 @@
           </label>
           <input name="email" type="text" class="form-control" #email="ngModel" [(ngModel)]="matricula.email"
             required />
-          <small *ngIf="!email.valid && email.touched"  class="invalid-feedback d-block position-absolute">
+          <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block position-absolute">
             El email es un campo requerido
           </small>
         </div>
 
       </div>
-     
+
 
       <nav class=" botonera_inferior col col-12 mx-auto">
-        <button class="btn btn-info mx-auto shadow mb-2">
+        <a class="btn btn-info col-3 mx-auto shadow mb-2" (click)="siguiente('container_direccion','container_datosPersonales')">
           Siguiente
-        </button>
+        </a>
         <p class="text text-info">Volver atrás</p>
       </nav>
 
 
     </div>
 
-  -->
 
 
 
@@ -297,8 +295,7 @@
 
 
 
-    <div class=" form_part container">
-      <h2 class="text-center mb-5">Tu dirección</h2>
+    <div class="form_part  container" id="container_direccion">
 
       <div class="col">
         <!-- dirección usuario -->
@@ -328,7 +325,8 @@
           </label>
           <input name="direccion_user" type="text" class="form-control" #direccion_user="ngModel"
             [(ngModel)]="matricula.direccion_user" placehoder="Ej:Calle Ramiro de Maxtu, 10, 4D" required />
-          <small *ngIf="!direccion_user.valid && direccion_user.touched"  class="invalid-feedback d-block position-absolute">
+          <small *ngIf="!direccion_user.valid && direccion_user.touched"
+            class="invalid-feedback d-block position-absolute">
             La dirección es un campo requerido
           </small>
         </div>
@@ -342,7 +340,8 @@
 
             <input name="localidad_user" type="text" class="form-control" #localidad_user="ngModel"
               [(ngModel)]="matricula.localidad_user" required />
-            <small *ngIf="!localidad_user.valid && localidad_user.touched" class="invalid-feedback d-block position-absolute">
+            <small *ngIf="!localidad_user.valid && localidad_user.touched"
+              class="invalid-feedback d-block position-absolute">
               La localidad es un campo requerido
             </small>
           </div>
@@ -353,7 +352,8 @@
             </label>
             <input name="provincia_user" type="text" class="form-control" #provincia_user="ngModel"
               [(ngModel)]="matricula.provincia_user" required />
-            <small *ngIf="!provincia_user.valid && provincia_user.touched"  class="invalid-feedback d-block position-absolute">
+            <small *ngIf="!provincia_user.valid && provincia_user.touched"
+              class="invalid-feedback d-block position-absolute">
               La provincia es un campo requerido
             </small>
           </div>
@@ -363,7 +363,7 @@
               <h4>Código Postal</h4>
             </label>
             <input name="cp" type="number" class="form-control" #cp="ngModel" [(ngModel)]="matricula.cp" required />
-            <small *ngIf="!cp.valid && cp.touched"  class="invalid-feedback d-block position-absolute">
+            <small *ngIf="!cp.valid && cp.touched" class="invalid-feedback d-block position-absolute">
               El código postal es un campo requerido
             </small>
           </div>
@@ -409,11 +409,11 @@
           </div>
         </div>
       </div>
-      
+
       <nav class=" botonera_inferior col col-12 mx-auto">
-        <button class="btn btn-info mx-auto shadow mb-2">
+        <a class="btn btn-info col-3 mx-auto shadow mb-2" (click)="siguiente('container_pago','container_direccion')">
           Siguiente
-        </button>
+        </a>
         <p class="text text-info">Volver atrás</p>
       </nav>
     </div>
@@ -441,97 +441,74 @@
 
 
 
-    <!-- Pago --
+    <!-- Pago -->
 
-  <div class=" form_part container">
-    <div class="col">
-      <h2 class="text-center mb-5">Forma de Pago</h2>
-      <div class="col form-group">
-        <h4>¿Cómo pregieres abonar tu primer pago?</h4>
-
-
-
-        <div class="row col-8">
-          <div class="col">
-            <input name="pago" type="radio" class="form-control  d-none " id="pago_tarjeta" #pago="ngModel" value="no"
-              [(ngModel)]="matricula.pago" required />
-            <label for="pago_tarjeta" class="btn btn-outline-primary mr-3 ml-3 col-12">Tarjeta de crédito/débito<samp
-                class="font-weight-light"></samp></label>
-
-          </div>
-          <div class="col">
-            <input name="pago" type="radio" class="form-control  d-none " id="pago_tranferencia" #pago="ngModel"
-              value="si" [(ngModel)]="matricula.pago" required />
-            <label for="pago_tranferencia" class="btn btn-outline-primary mr-3 ml-3 col-12">Tranferencia
-              bancaria</label>
-          </div>
-        </div>
-
-        <h6 class="text-info pb-3">Detalles sobre forma de pago y proceso post pago →</h6>
-
-        <small *ngIf="!pago.valid && pago.touched"  class="invalid-feedback d-block position-absolute">
-          El pago es un campo requerido
-        </small>
-        <hr />
-
-      </div>
+    <div class="form_part  container" id="container_pago">
+      <div class="col">
+        <h2 class="text-center mb-5">Forma de Pago</h2>
+        <div class="col form-group">
+          <h4>¿Cómo prefieres abonar tu primer pago?</h4>
 
 
 
-
-
-
-
-
-
-
-
-
-      <div class="col form-group">
-        <h4>¿Vienes recomendado por alguien?</h4>
-
-        <div class="row">
-          <div class="col">
-            <div class="row">
-              
-              <input name="recomendado" id="recomendadoNo" type="radio" value="false" class="form-control d-none"
-                #recomendado="ngModel" [(ngModel)]="matricula.recomendado" required />
-              <label for="recomendadoNo" class="btn btn-outline-primary col-2 mr-3 ml-3 p-2 "> No </label>
-
-              <input name="recomendado" id="recomendadoSi" type="radio" value="true" class="form-control d-none"
-                #recomendado="ngModel" [(ngModel)]="matricula.recomendado" required />
-              <label for="recomendadoSi" class=" btn btn-outline-primary col-2 mr-3 ml-3 p-2 "> Sí</label>
+          <div class="row col-12">
+            <div class="col p-0">
+              <input name="pago" type="radio" class="form-control  d-none " id="pago_tarjeta" #pago="ngModel" value="no"
+                [(ngModel)]="matricula.pago" required />
+              <label for="pago_tarjeta" class="btn btn-outline-primary mr-3 ml-0 col-12">Tarjeta de crédito/débito (recomendado)<samp
+                  class="font-weight-light"></samp></label>
 
             </div>
-
-            <small *ngIf="!recomendado.valid && recomendado.touched"  class="invalid-feedback d-block position-absolute">
-              El pago es un campo requerido
-            </small>
-            <hr />
-
+            <div class="col">
+              <input name="pago" type="radio" class="form-control  d-none " id="pago_tranferencia" #pago="ngModel"
+                value="si" [(ngModel)]="matricula.pago" required />
+              <label for="pago_tranferencia" class="btn btn-outline-primary mr-3 ml-3 col-12">Tranferencia
+                bancaria</label>
+            </div>
           </div>
+
+          <h6 class="text-info pb-3">Detalles sobre forma de pago y proceso post pago →</h6>
+
+          <small *ngIf="!pago.valid && pago.touched" class="invalid-feedback d-block position-absolute">
+            El pago es un campo requerido
+          </small>
         </div>
 
+        <div class="col form-group">
+          <h4>¿Vienes recomendado por alguien?</h4>
 
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <input name="recomendado" id="recomendadoNo" type="radio" value="false" class="form-control d-none"
+                  #recomendado="ngModel" [(ngModel)]="matricula.recomendado" required />
+                <label for="recomendadoNo" class="btn btn-outline-primary col-2 mr-3 ml-3 p-2 "> No </label>
 
+                <input name="recomendado" id="recomendadoSi" type="radio" value="true" class="form-control d-none"
+                  #recomendado="ngModel" [(ngModel)]="matricula.recomendado" required />
+                <label for="recomendadoSi" class=" btn btn-outline-primary col-2 mr-3 ml-3 p-2 "> Sí</label>
+              </div>
 
-        <h6 class="text-info pb-3">Ver información legal →</h6>
+              <small *ngIf="!recomendado.valid && recomendado.touched"
+                class="invalid-feedback d-block position-absolute">
+                El pago es un campo requerido
+              </small>
+            </div>
+          </div>
 
+          <h6 class="text-info pb-3">Ver información legal →</h6>
 
-
-
-
-
-
-
-
-
-
+        </div>
       </div>
+
+      <nav class=" botonera_inferior col col-12 mx-auto">
+        <input type="submit" value="Enviar" class="btn btn-info col-3 mx-auto shadow mb-2"
+          [disabled]="!newForm.form.valid" />
+        <p class="text text-info">Volver atrás</p>
+      </nav>
+
     </div>
-  </div>  
-  <input type="submit" value="Guardar la publicación" class="btn btn-success" [disabled]="!newForm.form.valid" />
--->
+
 
   </form>
 

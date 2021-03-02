@@ -18,6 +18,7 @@ import { ConexionService } from './services/conexion/conexion.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormComponent } from './components/form/form.component';
+import { EndComponent } from './components/end/end.component';
 
 
 
@@ -25,7 +26,8 @@ import { FormComponent } from './components/form/form.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    FormComponent
+    FormComponent,
+    EndComponent
   ],
   imports: [
     BrowserModule, routing, FormsModule, // Modulos para fistintas funcionalidades

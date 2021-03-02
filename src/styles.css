@@ -1,20 +1,35 @@
 body {
+    font-family: Helvetica, sans-serif;
+    color: #567193;
     background-color: black;
 }
 
+#all_container_form, #all_container_home {
+    min-height: 700px;
+    background-color: #0f3b69;
+}
 
+#all_container_home {
+    color: white !important;
+}
 
+.btn-info {
+    color: #fff;
+    background-color: #0BC6FE !important;
+    border-color: #0BC6FE !important;
+}
 
+.text-info {
+    color: #0BC6FE !important;
+}
 
+/* Home y End */
 
-
-
-
+#all_container_home img {
+    width: 350px;
+}
 
 /* Form.Component */
-#all_container_form {
-    min-height: 700px;
-}
 
 #lateral_menu {
     position: relative;
@@ -27,13 +42,20 @@ body {
     bottom: 0px;
     right: 0px;
 }
-@media (max-width: 768px) { #lateral_menu {
-display: none;
-} }
+
+@media (max-width: 768px) {
+    #lateral_menu {
+        display: none;
+    }
+}
+
 #contenedor_imagen_form img {
     width: 100%;
 }
 
+
+/*#container_especializacion, #container_modYhor, #container_tarifas, #container_datosPersonales, #container_direccion, #container_pago { display: none;}
+*/
 /* Formulario */
 
 .form_part {
@@ -48,32 +70,28 @@ display: none;
     position: absolute;
     bottom: -10px;
     left: 0px;
-    display: flex;flex-flow: column nowrap; justify-content: center;align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     margin: auto;
     padding-bottom: 3rem;
 }
+
 form label:focus, form label:active {
     background: black;
     color: #fbfcfc;
 }
 
 input:checked+label {
+    /* Para dejar los label de los radio que hemos marcado */
     box-shadow: 0 0 0.19rem 0.2rem rgba(38, 143, 255, 0.5);
     color: #fff;
     background-color: #007bff;
     border-color: #007bff;
 }
 
-select[name="horario"]:focus>option[value=""] {
+select:focus>option[value=""] {
+    /* Para mostrar la opción de ejemplo en los select del horario y al pinchar no se vean */
     display: none;
 }
-
-
-
-
-
-
-
-
-
-

@@ -13,9 +13,9 @@ import { EndComponent } from './components/end/end.component';
 // Matriz de rutas / Definir las rutas
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'inicio', component: HomeComponent },
-    { path: 'formulario', component: FormComponent },
-    { path: 'final', component: EndComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'form', component: FormComponent },
+    { path: 'end', component: EndComponent },
    
 ];
 
