@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+/* Form.Component */
+#all_container_form {
+    min-height: 700px;
+}
+
+#lateral_menu {
+    position: relative;
+    color: white;
+    background-color: #0f3b69;
+}
+
+#contenedor_imagen_form {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+@media (max-width: 768px) { #lateral_menu {
+display: none;
+} }
+#contenedor_imagen_form img {
+    width: 100%;
+}
+
+/* Formulario */
+
+.form_part {
+    position: relative;
+    height: 100%;
+    margin: auto;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.botonera_inferior {
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    display: flex;flex-flow: column nowrap; justify-content: center;align-items: center;
+    margin: auto;
+    padding-bottom: 3rem;
+}
+form label:focus, form label:active {
+    background: black;
+    color: #fbfcfc;
+}
+
+input:checked+label {
+    box-shadow: 0 0 0.19rem 0.2rem rgba(38, 143, 255, 0.5);
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+select[name="horario"]:focus>option[value=""] {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+

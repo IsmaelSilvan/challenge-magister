@@ -1,215 +1,538 @@
-<ul>
-    <li class="text" *ngFor="let item of items">
-      {{item.name}}
-    </li>
-  </ul>
-  <hr/>  <hr/>  <hr/>  <hr/>  <hr/>  
+<div id="all_container_form" class="container row mt-3 mx-auto p-0  bg-white">
+  <div id="lateral_menu" class=" col col-3 p-0">
 
-<select >
-  <option></option>
-  <option *ngFor="let item of items">{{item.name}}</option>
-</select>
+    <div class="row col-12">
+      sfhg
+    </div>
 
+    <div id="contenedor_imagen_form" class="row col-md-12 col-0 m-0 p-0">
+      <img id="imagen_formulario" src="../../../assets/images/imagen1.png" alt="Imagen magister">
+    </div>
 
-
-
-
-
-
-
-
-
-
-<form #newForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-4 mt-4 ml-0 pl-3 pb-3 needs-validation">
-
-
-
-  <!-- especialización -->
-
-  <div class="form-group">
-    <label for="rama">rama</label>
-    <select name="rama" type="text" class="form-control" #rama="ngModel" [(ngModel)]="matricula.rama" required>
-      <option value="" readonly class="text text-secondary">Ej: Maestros - Audición y lenguaje </option>
-      <option *ngFor="let rama of ramas" value="{{rama.rama_description}}" class="fw-bold ">{{rama.rama_description}}</option>
-    </select>
   </div>
-  
-  <small *ngIf="!rama.valid && rama.touched" class="invalid-feedback d-block">
-    Este es un campo requerido
-  </small>
-  <hr />
-  
-  
-  <div class="form-group">
-    <label for="provincia">provincia</label>
-    <select name="provincia" type="text" class="form-control" #provincia="ngModel" [(ngModel)]="matricula.provincia" required>
-      <option value="" readonly class="text text-secondary">Ej: Madrid </option>
-      <option *ngFor="let provincia of provincias" value="{{provincia.city}}" class="fw-bold ">{{provincia.city}}</option>
-    </select>
-  </div>
-  
-  <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block">
-    Este es un campo requerido
-  </small>
-  <hr />
-  
-    <label for="provincia">provincia</label>
-    <input name="provincia" type="text" class="form-control" #provincia="ngModel" [(ngModel)]="matricula.provincia" required />
-    <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback  ">
-      El provincia es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="alumno_pre">alumno_pre</label>
-    <input name="alumno_pre" type="text" class="form-control" #alumno_pre="ngModel" [(ngModel)]="matricula.alumno_pre" required />
-    <small *ngIf="!alumno_pre.valid && alumno_pre.touched" class="invalid-feedback d-block">
-      El alumno_pre es un campo requerido
-    </small>
-    <hr />
-  
 
 
-      <!-- modalidad y horario -->
-  
-    <label for="modalidad">modalidad</label>
-    <input name="modalidad" type="text" class="form-control" #modalidad="ngModel" [(ngModel)]="matricula.modalidad" required />
-    <small *ngIf="!modalidad.valid && modalidad.touched" class="invalid-feedback d-block">
-      El modalidad es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="horario">horario</label>
-    <input name="horario" type="text" class="form-control" #horario="ngModel" [(ngModel)]="matricula.horario" required />
-    <small *ngIf="!horario.valid && horario.touched" class="invalid-feedback d-block">
-      El horario es un campo requerido
-    </small>
-    <hr />
-  
+
+  <form #newForm="ngForm" (ngSubmit)="onSubmit()" class="col-9 mx-0 my-3 px-3 needs-validation">
+    <!-- 
+    <div class="form_part container ">
+      <!-- especialización---
+      <h2 class="text-center mb-5">¿En que te quieres especializar?</h2>
+      <!-- especialización grupo top---
+      <div class="row  mb-5">
+        <div class="col">
+          <div class="form-group mb-3">
+            <h4>Rama</h4>
+
+            <h6 class="pb-3">(Seleciona una opción)</h6>
+            <select name="rama" class="form-control" #rama="ngModel" [(ngModel)]="matricula.rama" required>
+              <option value="" readonly class=" ">Ej: Maestros - Audición y lenguaje </option>
+              <option *ngFor="let rama of ramas" value="{{rama.rama_description}}" class="font-weight-bold ">
+                {{rama.rama_description}}
+              </option>
+            </select>
+
+            <small *ngIf="!rama.valid && rama.touched" class="invalid-feedback d-block position-absolute">
+              Este es un campo requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group mb-3">
+            <h4>Provincia</h4>
+            <h6 class="pb-3">(Seleciona una opción)</h6>
+            <select name="provincia" class="form-control " #provincia="ngModel" [(ngModel)]="matricula.provincia"
+              required>
+              <option value="" readonly class=" ">Ej: Madrid </option>
+              <option *ngFor="let provincia of provincias" value="{{provincia.city}}" class="font-weight-bold ">
+                {{provincia.city}}
+              </option>
+            </select>
+
+            <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block position-absolute">
+              Este es un campo requerido
+            </small>
+          </div>
+        </div>
+      </div>
+      <!-- Fin especialización grupo top---
+      <!-- especialización grupo mid---
+      <div class="col mb-5">
+        <h4>¿Has sido alumn@ de Magister?</h4>
+        <h6 class="text-info pb-3">Consulta Condiciones →</h6>
+        <div class="d-flex flex-nowrap flex-row justify-content-start  align-items-center">
+
+          <input name="alumno_pre" type="radio" class="form-control d-none" id="alumno_preNo" #alumno_preNo="ngModel"
+            value="no" [(ngModel)]="matricula.alumno_pre" required />
+          <label for="alumno_preNo" class="btn btn-outline-primary mr-3 col-1">No</label>
 
 
-      <!-- tarifas -->
-  
-    <label for="tarifas">tarifas</label>
-    <input name="tarifas" type="text" class="form-control" #tarifas="ngModel" [(ngModel)]="matricula.tarifas" required />
-    <small *ngIf="!tarifas.valid && tarifas.touched" class="invalid-feedback d-block">
-      El tarifas es un campo requerido
-    </small>
-    <hr />
-  
-  
+          <input name="alumno_pre" type="radio" class="form-control d-none" id="alumno_preSi" #alumno_preSi="ngModel"
+            value="si" [(ngModel)]="matricula.alumno_pre" required />
+          <label for="alumno_preSi" class="btn btn-outline-primary mr-3 col-1">Si</label>
 
 
-  <!-- datos personales -->
+          <input name="alumno_pre" type="radio" class="form-control d-none" id="alumno_preSi2017"
+            #alumno_preSi2017="ngModel" value="si, después de 2017" [(ngModel)]="matricula.alumno_pre" required />
+          <label for="alumno_preSi2017" class="btn btn-outline-primary mr-3 ">Si, después de 2017</label>
 
-    <label for="name">name</label>
-    <input name="name" type="text" class="form-control" #name="ngModel" [(ngModel)]="matricula.name" required />
-    <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
-      El name es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="dni">dni</label>
-    <input name="dni" type="text" class="form-control" #dni="ngModel" [(ngModel)]="matricula.dni" required />
-    <small *ngIf="!dni.valid && dni.touched" class="invalid-feedback d-block">
-      El dni es un campo requerido
-    </small>
-    <hr />
+        </div>
+        <small *ngIf="!provincia.valid && provincia.touched" class="invalid-feedback d-block position-absolute">
+          Este es un campo requerido
+        </small>
+      </div>
 
+      <div class="col mb-3">
+        <h4>Entrega de material</h4>
+        <h6 class="text-info mb-3">Consulta Condiciones →</h6>
+        <div class="d-flex flex-nowrap flex-row justify-content-start align-items-center">
+          <input name="entrega_material" type="radio" class="form-control d-none" id="entrega_material"
+            #entrega_material="ngModel" value=" Entrega de material mes a mes" [(ngModel)]="matricula.entrega_material"
+            required />
+
+          <label for="entrega_material" class="btn btn-outline-primary  ">Material mes a mes</label>
+        </div>
+      </div>
+      <!-- Fin especialización grupo mid---
+
+      <nav class=" botonera_inferior row col-12">
+        <button class="btn btn-info mx-auto shadow mb-3 ">
+          Siguiente
+        </button>
+      </nav>
+
+    </div>
+  -->
+
+
+
+    <!--
+
+    <div class=" form_part container">
+      <!-- modalidad y horario ---
+      <h2 class="text-center mb-5">Elegige el horario y modalidad que más te acomode</h2>
+
+      <!-- Inicio Modalidad---
+      <div class="col form-group mb-5">
+        <h4>Modalidad</h4>
+        <h6 class="mb-3">(Seleciona una opción)</h6>
+
+        <div class="row form-group col-11">
+          <div class="d-flex flex-wrap flex-row justify-content-around  align-items-center">
+
+            <div *ngFor="let modalidad of modalidades" class="col-md-6 col-12">
+              <input name="modalidad" type="radio" class="form-control d-none" id="{{modalidad.id}}"
+                #modalidad="ngModel" value="{{modalidad.mod}}" [(ngModel)]="matricula.modalidad" required />
+
+              <label for="{{modalidad.id}}" class="btn btn-outline-primary w-100"> {{modalidad.mod}}</label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Fin Modalidad---
+      <!-- Inicio Horario---
+      <div class="col col-11">
+        <div class="form-group mb-4">
+          <h4>Horario</h4>
+          <h6 class="pb-3">(Seleciona una opción)</h6>
+          <select name="horario" class="form-control mb-3" #horario="ngModel" id="horario"
+            [(ngModel)]="matricula.horario" required>
+            <option value="" class=" ">1 Clase al mes Prácticos y Programación sábados por la mañana. Grupo 1 de 10 a 14
+              horas.</option>
+            <option *ngFor="let horario of horarios" value="{{horario.horario}}" class="font-weight-bold  ">
+              {{horario.horario}}
+            </option>
+          </select>
+
+          <select name="horario" class="form-control mb-3" #horario="ngModel" id="horario2"
+            [(ngModel)]="matricula.horario" required>
+            <option value="" class=" ">1 Clase al mes Prácticos y Programación sábados por la mañana. Grupo 1 de 10 a 14
+              horas.</option>
+            <option *ngFor="let horario of horarios" value="{{horario.horario}}" class="font-weight-bold  ">
+              {{horario.horario}}
+            </option>
+          </select>
+          <select name="horario" class="form-control mb-3" #horario="ngModel" id="horario3"
+            [(ngModel)]="matricula.horario" required>
+            <option value="" class=" ">1 Clase al mes Prácticos y Programación sábados por la mañana. Grupo 1 de 10 a 14
+              horas.</option>
+            <option *ngFor="let horario of horarios" value="{{horario.horario}}" class="font-weight-bold  ">
+              {{horario.horario}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- Fin Horario---
+
+      <nav class=" botonera_inferior col col-12 mx-auto">
+        <button class="btn btn-info mx-auto shadow mb-2">
+          Siguiente
+        </button>
+        <p class="text text-info">Volver atrás</p>
+      </nav>
+
+
+    </div>
+
+  -->
+
+
+
+
+
+
+
+
+    <!--
+    <div class=" form_part container">
+      <!-- tarifas ---
+      <h2 class="text-center mb-5">Selecciona tu tarifa</h2>
+      <div class="form-group col col-12">
+        <h4>Tarifas</h4>
+        <h6 class="pb-3">(Seleciona una opción)</h6>
+        <div class="col form-group">
+          <div *ngFor="let tarifa of tarifas" class="">
+            <input name="tarifa" type="radio" class="form-control d-none " id="{{tarifa.id}}" #tarifa="ngModel"
+              value="{{tarifa.tarifa}}" [(ngModel)]="matricula.tarifa" required />
+
+            <label for="{{tarifa.id}}" class="btn btn-outline-primary w-100">{{tarifa.tarifa}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <nav class=" botonera_inferior col col-12 mx-auto">
+        <button class="btn btn-info mx-auto shadow mb-2">
+          Siguiente
+        </button>
+        <p class="text text-info">Volver atrás</p>
+      </nav>
+
+    </div>
+
+  -->
+
+
+
+
+
+
+
+
+
+    <!--
+
+    <div class="form_part container">
+      <!-- datos personales ---
+      <h2 class="text-center mb-5">Tus datos personales</h2>
+
+      <div class="col form-group mb-6 py-5">
+        <label for="name">
+          <h4>Nombre completo</h4>
+        </label>
+        <input name="name" type="text" class="form-control" #name="ngModel" [(ngModel)]="matricula.name" required />
+        <small *ngIf="!name.valid && name.touched"  class="invalid-feedback d-block position-absolute">
+          El name es un campo requerido
+        </small>
+      </div>
+
+      <div class="row px-3">
+        <div class="col col-md-4 col-12 form-group">
+          <label for="dni">
+            <h4>DNI - NIE</h4>
+          </label>
+          <input name="dni" type="text" class="form-control" #dni="ngModel" [(ngModel)]="matricula.dni" required />
+          <small *ngIf="!dni.valid && dni.touched"  class="invalid-feedback d-block position-absolute">
+            El dni es un campo requerido
+          </small>
+        </div>
+
+        <div class="col col-md-4 col-12 form-group">
+          <label for="movil">
+            <h4>Movil</h4>
+          </label>
+          <input name="movil" type="tel" class="form-control" #movil="ngModel" [(ngModel)]="matricula.movil" required />
+          <small *ngIf="!movil.valid && movil.touched"  class="invalid-feedback d-block position-absolute">
+            El movil es un campo requerido
+          </small>
+        </div>
+
+        <div class="col col-md-4 col-12 form-group">
+          <label for="email">
+            <h4>Email</h4>
+          </label>
+          <input name="email" type="text" class="form-control" #email="ngModel" [(ngModel)]="matricula.email"
+            required />
+          <small *ngIf="!email.valid && email.touched"  class="invalid-feedback d-block position-absolute">
+            El email es un campo requerido
+          </small>
+        </div>
+
+      </div>
+     
+
+      <nav class=" botonera_inferior col col-12 mx-auto">
+        <button class="btn btn-info mx-auto shadow mb-2">
+          Siguiente
+        </button>
+        <p class="text text-info">Volver atrás</p>
+      </nav>
+
+
+    </div>
+
+  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class=" form_part container">
+      <h2 class="text-center mb-5">Tu dirección</h2>
+
+      <div class="col">
+        <!-- dirección usuario -->
+        <div class="form-group col mb-4">
+          <label for="comunidad_examen">
+            <h4>Comunidad de Exámen</h4>
+          </label>
+          <h6 class="pb-3">(Seleciona una opción)</h6>
+          <select name="comunidad_examen" class="form-control " #comunidad_examen="ngModel"
+            [(ngModel)]="matricula.comunidad_examen" required>
+            <option value="" readonly class=" ">Ej: Comunidad de Madrid </option>
+            <option *ngFor="let comunidad of comunidades" value="{{comunidad.CA}}" class="font-weight-bold ">
+              {{comunidad.CA}}
+            </option>
+          </select>
+
+          <small *ngIf="!comunidad_examen.valid && comunidad_examen.touched"
+            class="invalid-feedback d-block position-absolute">
+            Este es un campo requerido
+          </small>
+        </div>
+
+
+        <div class="form-group col mb-4">
+          <label for="direccion_user">
+            <h4>Dirección</h4>
+          </label>
+          <input name="direccion_user" type="text" class="form-control" #direccion_user="ngModel"
+            [(ngModel)]="matricula.direccion_user" placehoder="Ej:Calle Ramiro de Maxtu, 10, 4D" required />
+          <small *ngIf="!direccion_user.valid && direccion_user.touched"  class="invalid-feedback d-block position-absolute">
+            La dirección es un campo requerido
+          </small>
+        </div>
+
+
+        <div class="row mb-3 px-3">
+          <div class="col form-group ">
+            <label for="localidad_user">
+              <h4>Localidad</h4>
+            </label>
+
+            <input name="localidad_user" type="text" class="form-control" #localidad_user="ngModel"
+              [(ngModel)]="matricula.localidad_user" required />
+            <small *ngIf="!localidad_user.valid && localidad_user.touched" class="invalid-feedback d-block position-absolute">
+              La localidad es un campo requerido
+            </small>
+          </div>
+
+          <div class="col form-group">
+            <label for="provincia_user">
+              <h4>Provincia</h4>
+            </label>
+            <input name="provincia_user" type="text" class="form-control" #provincia_user="ngModel"
+              [(ngModel)]="matricula.provincia_user" required />
+            <small *ngIf="!provincia_user.valid && provincia_user.touched"  class="invalid-feedback d-block position-absolute">
+              La provincia es un campo requerido
+            </small>
+          </div>
+
+          <div class="col form-group">
+            <label for="cp">
+              <h4>Código Postal</h4>
+            </label>
+            <input name="cp" type="number" class="form-control" #cp="ngModel" [(ngModel)]="matricula.cp" required />
+            <small *ngIf="!cp.valid && cp.touched"  class="invalid-feedback d-block position-absolute">
+              El código postal es un campo requerido
+            </small>
+          </div>
+
+        </div>
+
+
+
+        <div class="row ">
+          <div class="col ">
+            <div class="row mb-3">
+              <div class="col">
+                <div
+                  class="form-group col position-relative d-flex flex-nowrap flex-row justify-content-center align-items-center mb-0">
+                  <input name="info_legal" type="checkbox" class="  d-iline-block  " id="info_legal"
+                    #info_legal="ngModel" value="true" [(ngModel)]="matricula.info_legal" required />
+                  <div for="info_legal" class=" ml-3  d-inline">Acepto la <a
+                      class="text-info text-decoration-none">información legal</a></div>
+                </div>
+                <small *ngIf="!info_legal.valid && info_legal.touched"
+                  class="invalid-feedback d-block position-absolute m-0">
+                  Este es un campo requerido
+                </small>
+              </div>
+
+              <div class="col">
+                <div
+                  class="form-group from-group-check col position-relative d-flex flex-nowrap flex-row justify-content-center align-items-center mb-0">
+                  <input name="protec_datos" type="checkbox" class="  " id="protec_datos" #protec_datos="ngModel"
+                    value="true" [(ngModel)]="matricula.protec_datos" required />
+                  <div for="protec_datos" class=" ml-3 d-inline ">Acepto la <a
+                      class="text-info text-decoration-none">proteción
+                      de datos</a></div>
+                </div>
+                <small *ngIf="!protec_datos.valid && protec_datos.touched"
+                  class="invalid-feedback d-block position-absolute m-0">
+                  Este es un campo requerido
+                </small>
+              </div>
+            </div>
+
+            <h6 class="text-info ">Detalles sobre forma de pago y proceso post pago →</h6>
+          </div>
+        </div>
+      </div>
       
-    <label for="movil">movil</label>
-    <input name="movil" type="tel" class="form-control" #movil="ngModel" [(ngModel)]="matricula.movil" required />
-    <small *ngIf="!movil.valid && movil.touched" class="invalid-feedback d-block">
-      El movil es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="email">email</label>
-    <input name="email" type="text" class="form-control" #email="ngModel" [(ngModel)]="matricula.email" required />
-    <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
-      El email es un campo requerido
-    </small>
-    <hr />
-  
+      <nav class=" botonera_inferior col col-12 mx-auto">
+        <button class="btn btn-info mx-auto shadow mb-2">
+          Siguiente
+        </button>
+        <p class="text text-info">Volver atrás</p>
+      </nav>
+    </div>
 
 
 
-    <!-- dirección usuario -->
-    <label for="comunidad_examen">comunidad_examen</label>
-    <input name="comunidad_examen" type="text" class="form-control" #comunidad_examen="ngModel" [(ngModel)]="matricula.comunidad_examen" required />
-    <small *ngIf="!comunidad_examen.valid && comunidad_examen.touched" class="invalid-feedback d-block">
-      El comunidad_examen es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="direccion_user">direccion_user</label>
-    <input name="direccion_user" type="text" class="form-control" #direccion_user="ngModel" [(ngModel)]="matricula.direccion_user" required />
-    <small *ngIf="!direccion_user.valid && direccion_user.touched" class="invalid-feedback d-block">
-      El direccion_user es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="localidad_user">localidad_user</label>
-    <input name="localidad_user" type="text" class="form-control" #localidad_user="ngModel" [(ngModel)]="matricula.localidad_user" required />
-    <small *ngIf="!localidad_user.valid && localidad_user.touched" class="invalid-feedback d-block">
-      El localidad_user es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="provincia_user">provincia_user</label>
-    <input name="provincia_user" type="text" class="form-control" #provincia_user="ngModel" [(ngModel)]="matricula.provincia_user" required />
-    <small *ngIf="!provincia_user.valid && provincia_user.touched" class="invalid-feedback d-block">
-      El provincia_user es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="cp">cp</label>
-    <input name="cp" type="number" class="form-control" #cp="ngModel" [(ngModel)]="matricula.cp" required />
-    <small *ngIf="!cp.valid && cp.touched" class="invalid-feedback d-block">
-      El cp es un campo requerido
-    </small>
-    <hr />
-  
-  
 
 
-      <!-- Pago -->
-   
-  
-  
-    <label for="pago">pago</label>
-    <input name="pago" type="text" class="form-control" #pago="ngModel" [(ngModel)]="matricula.pago" required />
-    <small *ngIf="!pago.valid && pago.touched" class="invalid-feedback d-block">
-      El pago es un campo requerido
-    </small>
-    <hr />
-  
-   <label for="info_legal">info_legal</label>
-    <input name="info_legal" type="text" class="form-control" #info_legal="ngModel" [(ngModel)]="matricula.info_legal" required />
-    <small *ngIf="!info_legal.valid && info_legal.touched" class="invalid-feedback d-block">
-      El pago es un campo requerido
-    </small>
-    <hr />
-  
-  
-    <label for="protec_datos">protec_datos</label>
-    <input name="protec_datos" type="text" value=true class="form-control" #protec_datos="ngModel" [(ngModel)]="matricula.protec_datos" required />
-    <small *ngIf="!protec_datos.valid && protec_datos.touched" class="invalid-feedback d-block">
-      El protec_datos es un campo requerido
-    </small>
-    <hr />
-   
-  
-    
-    <input type="submit" value="Guardar la publicación" class="btn btn-success" [disabled]="!newForm.form.valid" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Pago --
+
+  <div class=" form_part container">
+    <div class="col">
+      <h2 class="text-center mb-5">Forma de Pago</h2>
+      <div class="col form-group">
+        <h4>¿Cómo pregieres abonar tu primer pago?</h4>
+
+
+
+        <div class="row col-8">
+          <div class="col">
+            <input name="pago" type="radio" class="form-control  d-none " id="pago_tarjeta" #pago="ngModel" value="no"
+              [(ngModel)]="matricula.pago" required />
+            <label for="pago_tarjeta" class="btn btn-outline-primary mr-3 ml-3 col-12">Tarjeta de crédito/débito<samp
+                class="font-weight-light"></samp></label>
+
+          </div>
+          <div class="col">
+            <input name="pago" type="radio" class="form-control  d-none " id="pago_tranferencia" #pago="ngModel"
+              value="si" [(ngModel)]="matricula.pago" required />
+            <label for="pago_tranferencia" class="btn btn-outline-primary mr-3 ml-3 col-12">Tranferencia
+              bancaria</label>
+          </div>
+        </div>
+
+        <h6 class="text-info pb-3">Detalles sobre forma de pago y proceso post pago →</h6>
+
+        <small *ngIf="!pago.valid && pago.touched"  class="invalid-feedback d-block position-absolute">
+          El pago es un campo requerido
+        </small>
+        <hr />
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="col form-group">
+        <h4>¿Vienes recomendado por alguien?</h4>
+
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              
+              <input name="recomendado" id="recomendadoNo" type="radio" value="false" class="form-control d-none"
+                #recomendado="ngModel" [(ngModel)]="matricula.recomendado" required />
+              <label for="recomendadoNo" class="btn btn-outline-primary col-2 mr-3 ml-3 p-2 "> No </label>
+
+              <input name="recomendado" id="recomendadoSi" type="radio" value="true" class="form-control d-none"
+                #recomendado="ngModel" [(ngModel)]="matricula.recomendado" required />
+              <label for="recomendadoSi" class=" btn btn-outline-primary col-2 mr-3 ml-3 p-2 "> Sí</label>
+
+            </div>
+
+            <small *ngIf="!recomendado.valid && recomendado.touched"  class="invalid-feedback d-block position-absolute">
+              El pago es un campo requerido
+            </small>
+            <hr />
+
+          </div>
+        </div>
+
+
+
+
+        <h6 class="text-info pb-3">Ver información legal →</h6>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>  
+  <input type="submit" value="Guardar la publicación" class="btn btn-success" [disabled]="!newForm.form.valid" />
+-->
+
   </form>
 
-
-
+</div>

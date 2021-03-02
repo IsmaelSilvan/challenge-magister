@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-// Importamos el servicio con Firebase
+// Importamos nuestro servicio con Firebase
 import { ConexionService } from 'src/app/services/conexion/conexion.service';
 
 // Importamos los modelos de los elementos a plasmar en la vista
-import { Item } from 'src/app/models/item';   // Agregamos nuestro modelo para rellenar el formulario
 import { Rama } from 'src/app/models/rama';
 import { Comunidad } from 'src/app/models/comunidad';
 import { Tarifa } from 'src/app/models/tarifa';
@@ -12,6 +11,8 @@ import { Horario } from 'src/app/models/horario';
 import { Modalidad } from 'src/app/models/modalidad';
 import { Provincia } from 'src/app/models/provincia';
 
+// Tenemos que declarar esta variable para usar los métodos y la biblioteca de jQuery
+declare var $: any
 
 
 @Component({
@@ -23,12 +24,9 @@ import { Provincia } from 'src/app/models/provincia';
 
 export class FormComponent implements OnInit {
 
-  public items: any;                                            // Creamos la variable items, de tipo any, que recibira toda la colección
-  public item: Item;                                           // Creamos la variable item donde definiremos cada campo en la vista
-
   // Declaración para las ramas
-  public ramas: any;
-  public rama: Rama;
+  public ramas: any;                                          // Creamos la variable items, de tipo any, que recibira toda la colección
+  public rama: Rama;                        // Creamos la variable item donde definiremos cada campo en la vista
 
   // Declaración para las comunidades autónomas
   public comunidades: any;
@@ -54,22 +52,16 @@ export class FormComponent implements OnInit {
 
 
 
-
   // Declaramos la variable matricula para luego darle forma y enviarla al Firebase
   public matricula: any;
 
 
   constructor(private _conexionService: ConexionService) {  // Importamos el servicio en el constructor
-
     // Parte del constructor para plasmar datos en la vista
-    this.item = new Item('');                                 // Damos un valor vacio a nuestro objeto
-    this._conexionService.getItems().subscribe(item => {     // Con el método de nuestro servicio y el subscribe, hacemos que cada objeto dentro de items se converta en un elemento item
-      this.items = item;
-    })
 
     // Descomponer individualmente Ramas
-    this.rama = new Rama('');
-    this._conexionService.getRamas().subscribe(rama => {
+    this.rama = new Rama('');                           // Damos un valor vacio a nuestro objeto
+    this._conexionService.getRamas().subscribe(rama => { // Con el método de nuestro servicio y el subscribe, hacemos que cada objeto dentro de items se converta en un elemento item
       this.ramas = rama;
     })
 
@@ -99,22 +91,27 @@ export class FormComponent implements OnInit {
 
     // Descomponer individualmente las tarifas
     this.tarifa = new Tarifa('');
-    this._conexionService.getTarifas().subscribe(tarifa => {
+    _conexionService.getTarifas().subscribe(tarifa => {
+      this.tarifas = tarifa;
+    })
+
+    this._conexionService.getHorarios().subscribe(tarifa => {
       this.tarifas = tarifa;
     })
 
 
 
 
-
-    // Damos valor al elemento matrícula donde irán los datos del formulario
-    this.matricula = { // Asigno una forma vacia para que se rellene el formulario depués
+    // Damos valores vacios al elemento matrícula donde irán los datos del formulario
+    this.matricula = {
+      /* Datos que se recogeran de Firebase */
       rama: '',
       provincia: '',
       alumno_pre: '',
+      entrega_material: '',
       modalidad: '',
       horario: '',
-      tarifas: '',
+      tarifa: '',
       /* Datos usuario */
       name: '',
       dni: '',
@@ -127,15 +124,16 @@ export class FormComponent implements OnInit {
       cp: '',
       info_legal: '',
       protec_datos: '',
-      pago: ''
+      pago: '',
+      recomendado: ''
     };
 
 
   }
 
   ngOnInit(): void {
+    // this._conexionService.getTarifas();
   }
-
 
   onSubmit() {
     /*  console.log(this.matricula);
@@ -146,6 +144,7 @@ export class FormComponent implements OnInit {
 
 
   }
+
 
 
 }

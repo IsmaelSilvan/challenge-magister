@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-// Importamos modulos del FireStore para guardar datos
+// Importamos modulos del FireStore y otros modulos para guardar y recoger los datos 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs'; // Inyectamos el observable
+import { map } from 'rxjs/operators'; // Importamos maps para coger también las ID de las colecciones
 
 // Importamos las interfaces de los distintos campos
-import { ItemInterface } from 'src/app/interfaces/item-interface'; // Importamos nuestro Modelo/Interface
 import { ComunidadInterface } from 'src/app/interfaces/comunidad-interface';
 import { ProvinciaInterface } from 'src/app/interfaces/provincia-interface';
 import { RamaInterface } from 'src/app/interfaces/rama-interface';
-import { TarifaInterface } from 'src/app/interfaces/tarifa-interface';
-import { HorarioInterface } from 'src/app/interfaces/horario-interface';
-import { ModalidadInterface } from 'src/app/interfaces/modalidad-interface';
+// A diferencia de los anteriores en estos campos necesitamos relacionar también la id, de forma que creamos una interfaz más
+import { TarifaInterface, TarifaId } from 'src/app/interfaces/tarifa-interface';
+import { HorarioInterface, HorarioId } from 'src/app/interfaces/horario-interface';
+import { ModalidadInterface, ModalidadId } from 'src/app/interfaces/modalidad-interface';
 
 
 @Injectable({
@@ -22,10 +23,6 @@ import { ModalidadInterface } from 'src/app/interfaces/modalidad-interface';
 export class ConexionService {
 
   // Creamos estas variables a las que daremos valor en el constructor
-  private itemsCollection: AngularFirestoreCollection<ItemInterface>;
-  public items: Observable<ItemInterface[]>;
-
-
   // Variables para las ramas
   private ramasCollection: AngularFirestoreCollection<RamaInterface>;
   public ramas: Observable<RamaInterface[]>;
@@ -35,32 +32,29 @@ export class ConexionService {
   private comunidadesCollection: AngularFirestoreCollection<ComunidadInterface>;
   public comunidades: Observable<ComunidadInterface[]>;
 
-  
+
   // Variables para las provincias
   private provinciasCollection: AngularFirestoreCollection<ProvinciaInterface>;
   public provincias: Observable<ProvinciaInterface[]>;
 
-  
+
   // Variables para las modalidades
   private modalidadesCollection: AngularFirestoreCollection<ModalidadInterface>;
-  public modalidades: Observable<ModalidadInterface[]>;
+  public modalidades: Observable<ModalidadId[]>;
 
-  
-  
+
   // Variables para los horarios 
   private horariosCollection: AngularFirestoreCollection<HorarioInterface>;
-  public horarios: Observable<HorarioInterface[]>;
-  
-  
+  public horarios: Observable<HorarioId[]>;
+
+
   // Variables para las tarifas 
   private tarifasCollection: AngularFirestoreCollection<TarifaInterface>;
-  public tarifas: Observable<TarifaInterface[]>;
-
+  public tarifas: Observable<TarifaId[]>;
 
 
 
   // Variable de la matrícula  
-
   private matriculaCollection: AngularFirestoreCollection<any>; // Declaramos la colecion de matriculas donde guardaremos las matriculas
   public matricula: object;                                     // Declaramos la variable
 
@@ -72,35 +66,50 @@ export class ConexionService {
   constructor(private _angularFirestore: AngularFirestore) {
 
     // Damos valores a las variables que hemos creado anteriormente
-    // Item
-    this.itemsCollection = _angularFirestore.collection<ItemInterface>('items/numero_array/multipli'); // Esta variable es igual a la colección recibida de FireStore, y es de tipo Iem
-    this.items = this.itemsCollection.valueChanges();
-
     // Ramas
-    this.ramasCollection = _angularFirestore.collection<RamaInterface>('ramas'); //Recoge la colección ramas que es de tipo de la interfaz ramas
-    this.ramas = this.ramasCollection.valueChanges();
+    this.ramasCollection = _angularFirestore.collection<RamaInterface>('ramas');  // Primero recogemos en una variable toda nuestra coleccion de datos
+    this.ramas = this.ramasCollection.valueChanges();                             // Asignamos los valores de los objetos recogidos en la coleccion en otra variable
 
     // Comunidades
-    this.comunidadesCollection = _angularFirestore.collection<ComunidadInterface>('lugares/comunidadID/Comunidad'); //Recoge la colección comunidad que es de tipo de la interfaz comunidades
+    this.comunidadesCollection = _angularFirestore.collection<ComunidadInterface>('lugares/comunidadID/Comunidad');  
     this.comunidades = this.comunidadesCollection.valueChanges();
 
     // Provincias
-    this.provinciasCollection = _angularFirestore.collection<ProvinciaInterface>(' '); //Recoge la colección comunidad que es de tipo de la interfaz  provincias
+    this.provinciasCollection = _angularFirestore.collection<ProvinciaInterface>('lugares/provinciaID/provincia');
     this.provincias = this.provinciasCollection.valueChanges();
 
     // Modalidades
-    this.modalidadesCollection = _angularFirestore.collection<ModalidadInterface>(' '); //Recoge la colección comunidad que es de tipo de la interfaz  
-    this.modalidades = this.modalidadesCollection.valueChanges();
+    this.modalidadesCollection = _angularFirestore.collection<ModalidadInterface>('asignatura/modalidadID/modalidad');
+    this.modalidades = this.modalidadesCollection.snapshotChanges().pipe( // Este método sirve para asociar a las colecciones la ID con la que fueron creadas
+      map(actions => actions.map(a => {                                   // usados principalmente para asignar el atributo "for" label a las "id" de sus input de tipo radio
+        const data = a.payload.doc.data() as ModalidadInterface;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
 
     // Horarios 
-    this.horariosCollection = _angularFirestore.collection<HorarioInterface>(' '); //Recoge la colección comunidad que es de tipo de la interfaz  
-    this.horarios = this.horariosCollection.valueChanges();
+    this.horariosCollection = _angularFirestore.collection<HorarioInterface>('asignatura/horarioID/horario'); //Recoge la colección comunidad que es de tipo de la interfaz  
+    this.horarios = this.horariosCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as HorarioInterface;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
 
     // Tarifas
-    this.tarifasCollection = _angularFirestore.collection<TarifaInterface>(' '); //Recoge la colección comunidad que es de tipo de la interfaz  
-    this.tarifas = this.tarifasCollection.valueChanges();
+    this.tarifasCollection = _angularFirestore.collection<TarifaInterface>('asignatura/tarifasID/tarifas'); //Recoge la colección comunidad que es de tipo de la interfaz  provincias
+    this.tarifas = this.tarifasCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as TarifaInterface;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
 
-    
+
+
 
     // Matrícula
     this.matriculaCollection = _angularFirestore.collection<any>('matriculas');   // Cogemos la colección para las matrículas
@@ -110,10 +119,6 @@ export class ConexionService {
   }
 
   // Métodos para mostrar los elementos en la vista
-
-  getItems() {
-    return this.items;
-  }
 
   getRamas() {
     return this.ramas;
@@ -153,13 +158,13 @@ export class ConexionService {
   }
 
 
-/*
-ponerDatos(plural:any, unidad: any) => {
-   unidad = new Comunidad('');
-  this._conexionService.getComunidades().subscribe(comunidad => {
-    this.comunidades = comunidad;
-
-}
-*/
+  /*
+  ponerDatos(plural:any, unidad: any) => {
+     unidad = new Comunidad('');
+    this._conexionService.getComunidades().subscribe(comunidad => {
+      this.comunidades = comunidad;
+  
+  }
+  */
 
 }

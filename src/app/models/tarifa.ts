@@ -1,7 +1,7 @@
-export class Tarifa{
-	
+export class Tarifa {
+
 	constructor(
-	 tarifa:string
-		) {}
+		tarifa: string
+	) { }
 
 }
