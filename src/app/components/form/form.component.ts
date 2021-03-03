@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Este servicio sirve para cambiar de componente al acabar el formulario
 
 // Importamos nuestro servicio con Firebase
 import { ConexionService } from 'src/app/services/conexion/conexion.service';
@@ -10,6 +11,7 @@ import { Tarifa } from 'src/app/models/tarifa';
 import { Horario } from 'src/app/models/horario';
 import { Modalidad } from 'src/app/models/modalidad';
 import { Provincia } from 'src/app/models/provincia';
+
 
 // Tenemos que declarar esta variable para usar los métodos y la biblioteca de jQuery
 declare var $: any
@@ -23,7 +25,7 @@ declare var $: any
 })
 
 export class FormComponent implements OnInit {
- 
+
   // Declaración para las ramas
   public ramas: any;                                          // Creamos la variable items, de tipo any, que recibira toda la colección
   public rama: Rama;                        // Creamos la variable item donde definiremos cada campo en la vista
@@ -56,9 +58,9 @@ export class FormComponent implements OnInit {
   public matricula: any;
 
 
-  constructor(private _conexionService: ConexionService) {  // Importamos el servicio en el constructor
+  constructor(private _conexionService: ConexionService,private _router: Router) {  // Importamos el servicio en el constructor
     // Parte del constructor para plasmar datos en la vista
- 
+
     // Descomponer individualmente Ramas
     this.rama = new Rama('');                           // Damos un valor vacio a nuestro objeto
     this._conexionService.getRamas().subscribe(rama => { // Con el método de nuestro servicio y el subscribe, hacemos que cada objeto dentro de items se converta en un elemento item
@@ -141,11 +143,21 @@ export class FormComponent implements OnInit {
        console.log(Object.values(this.matricula));
        */
     this._conexionService.addMatricula(this.matricula); // Envio los datos que recibo  al método de mi servicio para enviar los datos finales del formulario
+    this._router.navigate(['end']);
   }
 
- siguiente(siguiente:string,anterior:string){
- $('#'+siguiente).css('display','block');  
- $('#'+anterior).css('display','none');
- }
+  siguiente(siguiente: string, actual: string,image_name:string, reverse: boolean) {
+    if (reverse == false) {
+      $('#' + siguiente).css('display', 'block');
+      $('#' + actual).css('display', 'none');
+      $('#imagen_formulario').attr('src', '../../../assets/images/'+image_name+'.png');
+    }
+    else if (reverse == true) {
+      $('#' + siguiente).css('display', 'none');
+      $('#' + actual).css('display', 'block');
+      $('#imagen_formulario').attr('src', '../../../assets/images/'+image_name+'.png');
+    }
+  }
+
 }
 
